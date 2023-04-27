@@ -43,7 +43,7 @@ const Home = () => {
 
   return (
     <div>
-      <Nav></Nav>
+      <Nav setCurrentPage= {setCurrentPage}></Nav>
       
       <div className={style.paginado}>
         <button className={style.buttonPaginado} onClick={() => prev()}>PREV</button>

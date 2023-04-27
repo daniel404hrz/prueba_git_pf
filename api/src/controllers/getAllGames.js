@@ -8,9 +8,9 @@ const getVideoGameApi = async () => {
     const games = [];
 
     let URL_BASE = `https://api.rawg.io/api/games?key=${API_KEY}`;
-    let pageGame = await axios.get(URL_BASE);
-
+    
     for (let index = 0; index < 5; index++) {
+      let pageGame = await axios.get(URL_BASE);
       pageGame.data?.results.forEach((e) => {
         games.push({
           id: e.id,

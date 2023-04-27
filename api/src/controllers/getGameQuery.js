@@ -7,8 +7,7 @@ const getGameQuery = async (req, res) => {
 
     if (name) {
       const nameQuery = getVideoGamesQuery.filter((g) =>
-        g.name.toLowerCase().includes(name.toLowerCase())
-      );
+        g.name.toLowerCase().includes(name.toLowerCase()));
       res.status(200).json(nameQuery);
     } else {
       res.status(200).json(getVideoGamesQuery);

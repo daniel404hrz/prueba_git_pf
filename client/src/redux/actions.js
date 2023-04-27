@@ -55,6 +55,7 @@ export const searchBar = (name) => {
     const game = await axios.get(
       `http://localhost:3001/videogames?name=${name}`
     );
+   
     dispatch({ type: SEARCH_BAR, payload: game.data });
   };
 };

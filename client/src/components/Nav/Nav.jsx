@@ -9,7 +9,7 @@ import {
   orderByRating,
 } from "../../redux/actions";
 
-const Nav = () => {
+const Nav = (setCurrentPage) => {
   const genres = useSelector((state) => state.genres);
   const dispatch = useDispatch();
 
@@ -33,6 +33,7 @@ const Nav = () => {
   const handleFilterGenres = (e) => {
     e.preventDefault();
     dispatch(filterGenres(e.target.value));
+    setCurrentPage(1)
   };
 
   const hadleOrderName = (e) => {

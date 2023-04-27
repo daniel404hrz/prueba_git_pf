@@ -59,8 +59,8 @@ const rootReducer = (state = initialState, action) => {
     case DELETE_GAME:
 
       return {
-        ...state,
-        videoGames: state.copiaVideoGames.filter((e)=>e.id !== action.payload),
+         ...state,
+         videoGames: state.copiaVideoGames.filter((e)=>e.id !== action.payload),
       };
 
     //FILTROS

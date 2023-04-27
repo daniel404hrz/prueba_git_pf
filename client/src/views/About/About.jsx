@@ -35,7 +35,7 @@ const About = () => {
             </a>
             <a
               className="icon"
-              href="https://github.com/sebasmayor06"
+              href="https://github.com/sebasmayor06/PI-Videogames"
               target="_blank"
               rel="noreferrer"
             >
