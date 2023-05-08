@@ -1,8 +1,9 @@
 import style from "../Create/Create.module.css";
 import { Link } from "react-router-dom";
-import { createVideoGame, getGenres, getAllGames } from "../../redux/actions";
+import { getGenres, getAllGames } from "../../redux/actions";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 
 const Create = () => {
@@ -67,7 +68,7 @@ const Create = () => {
 
   //HANDLES
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (valor.name.trim() === "" || valor.name.length <= 2) {
       setValidador("Minimum 2 characters are required in NAME field");
@@ -84,16 +85,9 @@ const Create = () => {
     } else if (valor.genre.length === 0) {
       setValidador("One or more genres required");
     } else {
-
-      if(videogames.find((f)=> valor.name === f.name)){
-        alert ("VIDEOGAME ALREADY EXISTS")
-      }else {
-        
-        dispatch(createVideoGame(valor));
-      alert("VIDEOGAME CREATED SUCCESSFULLY");
-      dispatch(getAllGames());
-
-
+      
+      const postGame = await axios.post("http://localhost:3001/videogames", valor)
+      
       setValidador("");
       setvalor({
         name: "",
@@ -104,7 +98,18 @@ const Create = () => {
         platforms: [],
         genre: [],
       });
-      }
+dispatch(getAllGames());
+alert(postGame.data.message)
+      // if(videogames.find((f)=> valor.name === f.name)){
+      //   alert ("VIDEOGAME ALREADY EXISTS")
+      // }else {
+        
+      //   dispatch(createVideoGame(valor));
+      // alert("VIDEOGAME CREATED SUCCESSFULLY");
+      // dispatch(getAllGames());
+
+      
+      //}
       
     }
   };
@@ -126,11 +131,8 @@ const Create = () => {
 
   const handleCheckGenres = (e) => {
     e.preventDefault();
-    //ojo dejar el errorcito para que me lo pidan en la calificacion
-    if (
-      e.target.value &&
-      e.target.value !== valor.genre.find((genre) => genre === e.target.value)
-    ) {
+
+    if (e.target.value) {
       setvalor({ ...valor, genre: [...valor.genre, e.target.value] });
     }
   };
@@ -153,10 +155,7 @@ const Create = () => {
 
   const handleCheckPlatforms = (e) => {
     e.preventDefault();
-    if (
-      e.target.value &&
-      e.target.value !== valor.platforms.find((plat) => plat === e.target.value)
-    ) {
+    if (e.target.value) {
       setvalor({ ...valor, platforms: [...valor.platforms, e.target.value] });
     }
     setValueSelect("0");

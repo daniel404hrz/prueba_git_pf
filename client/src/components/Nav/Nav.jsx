@@ -9,21 +9,11 @@ import {
   orderByRating,
 } from "../../redux/actions";
 
-const Nav = (setCurrentPage) => {
+const Nav = () => {
   const genres = useSelector((state) => state.genres);
   const dispatch = useDispatch();
 
-  // const handleClinckReset = ()=>{
-
-  //    dispatch(resetSelect())
-  // //para resetear las recetas
-  // // r.preventDefault(); //para que no se rompa
-  // document.getElementById("1").selectedIndex = 0;
-  // document.getElementById("2").selectedIndex = 0;
-  // document.getElementById("3").selectedIndex = 0;
-  // document.getElementById("4").selectedIndex = 0;
-
-  // }
+  
 
   const handleFilterOrigin = (e) => {
     e.preventDefault();
@@ -33,7 +23,7 @@ const Nav = (setCurrentPage) => {
   const handleFilterGenres = (e) => {
     e.preventDefault();
     dispatch(filterGenres(e.target.value));
-    setCurrentPage(1)
+    
   };
 
   const hadleOrderName = (e) => {

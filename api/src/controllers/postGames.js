@@ -14,7 +14,7 @@ const postGames = async (req, res) => {
       !rating ||
       !genre
     ) {
-      res.status(404).send("Faltan datos");
+      res.status(404).json({message:"Faltan datos"});
     } else {
       const [newGame, created]= await Videogame.findOrCreate({
         where:{name:name},
@@ -34,17 +34,15 @@ const postGames = async (req, res) => {
       });
 
       if(created){
-        res.status(200).json(newGame)
-      }else { 
-        res.status(404).send("YA EXISTE EL VIDEOGAME")
+        res.status(200).json({message:"VIDEOGAME CREATED SUCCESSFULLY"})
+      }else if(!created){ 
+        res.status(200).json({message:"VIDEOGAME ALREADY EXISTS"})
       }
-
-
 
       // res.status(200).json(newGame)
     }
   } catch (error) {
-    res.status(404).send("ERROR EN ALGUNO DE LOS DATOS INGRESADOS");
+    res.status(404).json({message:"ERROR EN ALGUNO DE LOS DATOS INGRESADOS"});
   }
 };
 

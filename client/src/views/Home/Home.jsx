@@ -15,6 +15,7 @@ const Home = () => {
   const dispatch = useDispatch();
   
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const pageCount = Math.ceil(games.length / pageSize);
   const indexOfLastGames = currentPage * pageSize;
@@ -24,13 +25,13 @@ const Home = () => {
   useEffect(() => {
     dispatch(getGenres());
     dispatch(setDetail());
+    dispatch(getAllGames()).then((res)=>setLoading(false));
   }, [dispatch]);
 
+ 
 
 
-  if(games.length===0){
-    dispatch(getAllGames());
-  }
+ 
 
   const next = () => {
     if (indexOfLastGames > games.length) return;
@@ -43,8 +44,23 @@ const Home = () => {
 
   return (
     <div>
-      <Nav setCurrentPage= {setCurrentPage}></Nav>
+      <Nav ></Nav>
       
+      
+      {loading? (
+        <div>
+        <img
+          src="https://www.icegif.com/wp-content/uploads/2021/12/icegif-1477.gif"
+          alt="loading"
+        />
+      </div>
+      ):( games.length === 0 ? (
+        
+        <div><h1 className={style.mensaje}>NO VIDEO GAME FOUND</h1>
+        
+        </div>
+      ):(
+        <>
       <div className={style.paginado}>
         <button className={style.buttonPaginado} onClick={() => prev()}>PREV</button>
         {Array.from({ length: pageCount }).map((_, index) => (
@@ -57,16 +73,9 @@ const Home = () => {
         ))}
         <button className={style.buttonPaginado} onClick={() => next()}>NEXT</button>
       </div>
-      {games.length > 0 ? (
+        
         <Cards games={currentGames}></Cards>
-      ) : (
-        <div>
-          <img
-            src="https://www.icegif.com/wp-content/uploads/2021/12/icegif-1477.gif"
-            alt="loading"
-          />
-        </div>
-      )}
+
 
       <div className={style.paginado}>
         <button className={style.buttonPaginado} onClick={() => prev()}>PREV</button>
@@ -80,6 +89,12 @@ const Home = () => {
         ))}
         <button className={style.buttonPaginado} onClick={() => next()}>NEXT</button>
       </div>
+        </>
+      )
+      )
+      
+      }
+
     </div>
   );
 };

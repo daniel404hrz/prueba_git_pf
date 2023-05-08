@@ -8,7 +8,6 @@ import {
   FILTER_GENRES,
   ORDER_NAME,
   ORDER_RATING,
-  CREATE_VIDEO_GAME,
   DELETE_GAME,
  
 } from "./actions";
@@ -34,16 +33,13 @@ const rootReducer = (state = initialState, action) => {
       
 
     case SEARCH_BAR:
-      return {
-        ...state,
-        videoGames: action.payload,
-      };
-
-    case CREATE_VIDEO_GAME:
-      return {
-        ...state,
-      };
-
+     
+        return {
+          ...state,
+          videoGames: action.payload
+        
+      }
+     
     case GET_ID:
       return {
         ...state,
@@ -72,7 +68,7 @@ const rootReducer = (state = initialState, action) => {
         );
         return { ...state, videoGames: filterApi };
       } else if ("Created" === action.payload) {
-        const filterDb = state.copiaVideoGames.filter(
+        const filterDb = state.videoGames.filter(
           (e) => e.created === true
         );
         return { ...state, videoGames: filterDb };

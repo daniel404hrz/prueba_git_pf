@@ -40,7 +40,7 @@ export const removeGame = (detailId) => {
   return async function (dispatch){
   await axios.delete(`http://localhost:3001/videogames/${detailId}`)
  
-  return dispatch ({type:DELETE_GAME , payload: detailId})
+  return dispatch({type:DELETE_GAME , payload: detailId})
 }
 }
 
@@ -78,14 +78,6 @@ export const setDetail = () => {
 
 
 
-
-export const createVideoGame = (valor) => {
-return async function (dispatch){
-  const postGame = await axios.post("http://localhost:3001/videogames", valor)
-
-    dispatch({type:CREATE_VIDEO_GAME, payload: postGame.data})
-}
-}
 //FILTROS
 
 export const filterOrigin = (payload) => {

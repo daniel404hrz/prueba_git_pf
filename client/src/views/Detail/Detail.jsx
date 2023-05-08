@@ -1,7 +1,7 @@
 import style from "./Detail.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect} from "react";
-import { getById, removeGame } from "../../redux/actions";
+import { getAllGames, getById, removeGame } from "../../redux/actions";
 import { useParams, Link } from "react-router-dom";
 
 
@@ -13,12 +13,14 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(getById(detailId));
+    
   }, [dispatch, detailId]);
 
   
 
   const handleDelete = () => {
     dispatch(removeGame(detailId))
+    dispatch(getAllGames())
   }
 
   

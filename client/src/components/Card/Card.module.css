@@ -31,7 +31,6 @@
     font-size: 10px;
     cursor: pointer;
     border: 1px solid grey;
-    border-radius: 5px;
     -moz-osx-font-smoothing: grayscale;
     backface-visibility: hidden;
     transform: translateZ(0);
